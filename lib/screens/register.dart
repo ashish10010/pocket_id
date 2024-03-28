@@ -47,7 +47,7 @@ class _RegisterState extends State<Register> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35),
                         child: Container(
-                          height: 300,
+                          height: 380,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(35),
@@ -76,7 +76,60 @@ class _RegisterState extends State<Register> {
                                     fontSize: 15,
                                   ),
                                 ),
-                              )
+                              ),
+                              Container(
+                                height: 40,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    55,
+                                    14,
+                                    214,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Register',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Already have an account',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text(
+                                    'Sign In ',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
