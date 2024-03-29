@@ -1,3 +1,4 @@
+
 import 'package:example/screens/home_page.dart';
 import 'package:example/utils/reusable.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ class _RegisterState extends State<Register> {
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) =>const HomeScreen(),
+                                        builder: (context) =>const MyHomePage(),
                                       ),
                                     );
                                   },
