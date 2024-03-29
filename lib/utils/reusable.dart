@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 Padding reusableTextField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 25.0),
+    padding: const EdgeInsets.symmetric(horizontal: 25.0),
     child: Container(
       height: 55,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.white,
         ),
-        borderRadius: BorderRadius.circular(55),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: TextField(
         controller: controller,
@@ -26,13 +26,18 @@ Padding reusableTextField(String text, IconData icon, bool isPasswordType,
             icon,
             color: Colors.grey[750],
           ),
+          labelText: text,
+          labelStyle: TextStyle(
+            color: Colors.grey[750],
+          ),
           filled: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          fillColor: Colors.grey[350],
+          fillColor: Colors.grey[300],
           border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30),),
             borderSide: BorderSide(
               width: 0,
-              style: BorderStyle.none,
+               style: BorderStyle.none,
             ),
           ),
         ),

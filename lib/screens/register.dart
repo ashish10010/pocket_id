@@ -1,3 +1,4 @@
+import 'package:example/screens/home_page.dart';
 import 'package:example/utils/reusable.dart';
 import 'package:flutter/material.dart';
 
@@ -57,12 +58,12 @@ class _RegisterState extends State<Register> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              reusableTextField("email", Icons.person, false,
+                              reusableTextField('Email', Icons.person, false,
                                   _emailTextController),
                               const SizedBox(
                                 height: 20,
                               ),
-                              reusableTextField("password", Icons.lock, true,
+                              reusableTextField("Password", Icons.lock, true,
                                   _passwordTextController),
                               const SizedBox(
                                 height: 20,
@@ -90,9 +91,15 @@ class _RegisterState extends State<Register> {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) =>const HomeScreen(),
+                                      ),
+                                    );
+                                  },
                                   child: const Text(
-                                    'Register',
+                                    'Sign Up',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -116,17 +123,23 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text(
-                                    'Sign In ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'Sign In ',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color:Color.fromARGB(
+                                    255,
+                                    55,
+                                    14,
+                                    214,
                                   ),
+                                      
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
