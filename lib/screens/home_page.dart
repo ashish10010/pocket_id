@@ -96,8 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Container quickLinks({text, icon, Function? ontap}) {
-    return Container(
+  SizedBox quickLinks({text, icon, Function? ontap}) {
+    return SizedBox(
       width: 147,
       height: 50,
       child: GestureDetector(
@@ -271,6 +271,76 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  SizedBox extractedBox({text, image, doc, isSaved}) {
+    return SizedBox(
+      height: 200,
+      width: 230,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 185,
+            width: 195,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadiusDirectional.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(130, 158, 158, 158),
+                    spreadRadius: 0,
+                    blurRadius: 0,
+                    offset: Offset(1, 2),
+                  ),
+                ]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 23,
+                ),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: const Color.fromARGB(255, 55, 14, 201),
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Image.asset(
+                      "$image",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 30,
+                  ),
+                  child: Text(
+                    "$text",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        letterSpacing: 0.8,
+                        fontFamily: "Poppins-Reg",
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -484,11 +554,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 220,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: const [
-                    SizedBox(
+                  children:  [
+                    const SizedBox(
                       width: 15,
                     ),
-                    //remaining elements
+                    extractedBox(
+                      text: "Vechile Registration",
+                      image: "assets/images/vregistration.jpg",
+                    ),
+                     extractedBox(
+                      text: "Income Certificate",
+                      image: "assets/images/income-certificate.jpg",
+                    ),
+                    extractedBox(
+                      text: "Birth Certificate",
+                      image: "assets/images/birthcertificate.png",
+                    ),
+
                   ],
                 ),
               ),
