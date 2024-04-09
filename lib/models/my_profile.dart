@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
@@ -10,44 +11,48 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  String firstName = 'John';
-  String lastName = 'Doe';
+  String firstname = 'John';
+  String lastname = 'Doe';
   String email = "";
   String gender = "";
   String dob = "24-09-2002";
+  String profileUrl = "empty";
 
-  Container buildContainer(title, info) {
+  Container builtContainer(title, info) {
     return Container(
       height: 68,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${title}',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Row(
-            children: [
-              Text(
-                info,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                Text(
+                  '${info}',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Icons.edit,
-                color: Colors.grey,
-              ),
-            ],
-          )
-        ],
+                SizedBox(
+                  width: 10,
+                ),
+                Icon(
+                  Icons.edit,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -56,114 +61,141 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Profile,"),
-      ),
+          title: Text('My Profile'),
+          backgroundColor: Color.fromARGB(255, 55, 14, 201)),
       body: Column(
         children: [
           ClipPath(
-            clipper: CustomClipperPath(),
+            clipper: CustomClipPath(),
             child: Container(
               color: Color.fromARGB(255, 55, 14, 201),
               height: 165,
               width: double.infinity,
             ),
           ),
-          Column(
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: CircleAvatar(
-                  radius: 68,
-                  backgroundColor: Colors.grey[300],
-                  child: Container(
-                    height: 120,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Icon(
-                      Icons.camera_alt,
-                      size: 50,
+          Transform.translate(
+            offset: Offset(0, -80),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    print('Change Profile Picture');
+                  },
+                  child: CircleAvatar(
+                    radius: 68,
+                    backgroundColor: Colors.grey[300],
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: FutureBuilder(
+                          future: futureFunction(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(child: CircularProgressIndicator());
+                            } else {
+                              if (snapshot.data == "empty") {
+                                return Icon(
+                                  Icons.add_a_photo,
+                                  size: 100,
+                                  color: Colors.grey,
+                                );
+                              } else {
+                                return CachedNetworkImage(
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  imageUrl: "${profileUrl}",
+                                  fit: BoxFit.cover,
+                                );
+                              }
+                            }
+                          }),
                     ),
                   ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 20,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "First Name",
+                'First Name',
                 style: TextStyle(
                   fontSize: 20,
+                  letterSpacing: 0.5,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 205,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(103, 104, 103, 103),
-                      blurRadius: 5,
-                      spreadRadius: 2.5,
-                      offset: Offset(2, 1),
-                    ),
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 0,
-                      spreadRadius: 0,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    buildContainer(
-                      "DOB",
-                      "$dob",
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    buildContainer(
-                      "Gender",
-                      "$gender",
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                    buildContainer(
-                      "Email",
-                      "$email",
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                  ],
-                ),
-              ),
             ],
-          )
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13),
+            child: Container(
+              height: 255,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(103, 104, 103, 103),
+                    blurRadius: 5,
+                    spreadRadius: 2.5,
+                    offset: Offset(2, 1),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    blurRadius: 0,
+                    spreadRadius: 0,
+                    offset: Offset(0, 0),
+                  )
+                ],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  builtContainer("DOB", "$dob"),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                  builtContainer(
+                    "Gender",
+                    "$gender",
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                  builtContainer(
+                    "Email",
+                    "$email",
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
+Future<String> futureFunction() async {
+  String url = "empty";
+  return url;
+}
 
-class CustomClipperPath extends CustomClipper<Path> {
+class CustomClipPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double w = size.width;
@@ -171,11 +203,19 @@ class CustomClipperPath extends CustomClipper<Path> {
 
     final path = Path();
     path.lineTo(0, h);
-    path.quadraticBezierTo(w*0.5, h, w, h-70);
+    path.quadraticBezierTo(
+      w * 0.5,
+      h,
+      w,
+      h - 70,
+    );
     path.lineTo(w, 0);
     path.close();
     return path;
   }
+
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
 }

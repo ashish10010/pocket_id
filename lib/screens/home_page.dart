@@ -3,6 +3,8 @@
 import 'dart:math' as math;
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:example/models/about.dart';
+import 'package:example/models/settings.dart';
 import 'package:flutter/material.dart';
 
 import '../models/my_profile.dart';
@@ -23,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     "driving",
     "vaccine",
     "passport"
-        "birth",
+     "birth",
     "income",
   ];
 
@@ -629,7 +631,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       quickLinks(
                           text: "About",
                           icon: Icons.info_outline_rounded,
-                          ontap: () {}),
+                          ontap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()));
+                          }),
+                      quickLinks(
+                          text: "Settings",
+                          icon: Icons.settings,
+                          ontap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SettingsPage()));
+                          }),
                     ],
                   ),
                 ),
