@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:math' as math;
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import '../models/my_profile.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -393,7 +397,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Row(
+                    child: Row(
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -443,7 +447,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: const CircularProgressIndicator(),
+                      child: FutureBuilder(
+                          future: getDocInfo("profile"),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else {
+                              if (snapshot.data == "empty") {
+                                return Container();
+                              } else {
+                                return Image.network(
+                                  "Snapshot.data",
+                                  fit: BoxFit.cover,
+                                );
+                              }
+                            }
+                          }),
                     ),
                   )
                 ],
@@ -554,7 +574,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 220,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children:  [
+                  children: [
                     const SizedBox(
                       width: 15,
                     ),
@@ -562,7 +582,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       text: "Vechile Registration",
                       image: "assets/images/vregistration.jpg",
                     ),
-                     extractedBox(
+                    extractedBox(
                       text: "Income Certificate",
                       image: "assets/images/income-certificate.jpg",
                     ),
@@ -570,7 +590,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       text: "Birth Certificate",
                       image: "assets/images/birthcertificate.png",
                     ),
-
                   ],
                 ),
               ),
@@ -591,7 +610,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       quickLinks(
                           text: "My Profile",
                           icon: Icons.person_add_alt_1_outlined,
-                          ontap: () {}),
+                          ontap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyProfile()));
+                          }),
                       const SizedBox(
                         width: 25,
                       ),
@@ -617,3 +641,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+// class DocContainer extends StatelessWidget {
+//   const DocContainer({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: NestedScrollView(
+//         floatHeaderSlivers: true,
+//         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+//           return <Widget> [];
+//         },
+//         body:ListView.builder(
+//           itemCount: 30,
+//           padding: const EdgeInsets.all(10),
+//           itemBuilder: (BuildContext context, int index) {
+//             return SizedBox(
+//               height: 50,
+//               child: Center(
+//                 child: Text('item $index'),
+//               ),
+//             );
+//           }),
+//           ),
+//     );
+//   }
+// }
