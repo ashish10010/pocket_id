@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 
+import 'package:example/models/about.dart';
 import 'package:example/models/my_profile.dart';
+import 'package:example/models/settings.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -102,6 +104,78 @@ class _NavDrawerState extends State<NavDrawer> {
                   builder: (context) => const MyProfile(),
                 ),
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.settings_outlined,
+              size: 30,
+            ),
+            title: const Text(
+              'Settings',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.info_outline_rounded,
+              size: 30,
+            ),
+            title: const Text(
+              'About',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const About(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.help_outline_rounded,
+              size: 30,
+            ),
+            title: const Text(
+              'Help',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+            ),
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const MyProfile(),
+              //   ),
+              // );
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.logout_rounded,
+              size: 30,
+            ),
+            title: const Text(
+              'Logout',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+            ),
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const MyProfile(),
+              //   ),
+              // );
             },
           ),
         ],
