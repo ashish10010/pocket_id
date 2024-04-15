@@ -8,6 +8,7 @@ import 'package:example/models/settings.dart';
 import 'package:flutter/material.dart';
 
 import '../models/my_profile.dart';
+import '../models/navdrawer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -207,6 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: "Poppins-Reg",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
                           const Text(
@@ -384,10 +386,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // drawer: NewDrawer(
-      //   username : firstName,
-      //   email: email,
-      // ),
+      drawer: NavDrawer(
+        username : firstName,
+        email: email,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
