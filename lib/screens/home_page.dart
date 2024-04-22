@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:example/models/about.dart';
 import 'package:example/models/settings.dart';
+import 'package:example/screens/documentspage.dart';
 import 'package:flutter/material.dart';
 
 import '../models/my_profile.dart';
@@ -161,7 +162,14 @@ class _MyHomePageState extends State<MyHomePage> {
             width: 280,
             height: 170,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                 MaterialPageRoute(
+                  builder: (context)=> DocImagePage(
+                    docname: '$doc', 
+                    text: text,
+                    ),
+                  );
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -412,10 +420,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Hello,",
+                                  "Hi,",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 30,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
